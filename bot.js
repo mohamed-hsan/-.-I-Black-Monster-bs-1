@@ -36,6 +36,12 @@ if(message.content.split(' ')[0] == prefix + 'bc1') {
     if (!args[1]) {
 return;
 }
+  .addField('تم الارسال بواسطة :', "<@" + message.author.id + ">")
+                 message.channel.sendEmbed(embed);
+        message.guild.members.forEach(m => {
+            var bc = new Discord.RichEmbed()
+.addField('**● المرسل  :**', `*** → ${message.author.username}#${message.author.discriminator}***`)
+            .addField('***● السيرفر  :***', `*** → ${message.guild.name}***`)
         message.guild.members.forEach(m => {
    if(!message.member.hasPermission('ADMINISTRATOR')) return;
             var bc = new Discord.RichEmbed()
