@@ -28,25 +28,25 @@ client.user.setGame(`*bc`,"http://twitch.tv/S-F")
   console.log('')
 });
 client.on('message', message => {
+    if (message.author.id === client.user.id) return;
+    if (message.guild) {
    let embed = new Discord.RichEmbed()
-
     let args = message.content.split(' ').slice(1).join(' ');
-     if(!message.channel.guild) return;
-if(message.content.split(' ')[0] == '*bc') {
-         message.react("✔️")
-          let embed = new Discord.RichEmbed()
-    .setColor("#FF00FF")
-    .setThumbnail(message.author.avatarURL)   
-                                      .addField('تم الارسال بواسطة :', "<@" + message.author.id + ">")
-                 message.channel.sendEmbed(embed);
+if(message.content.split(' ')[0] == prefix + 'bc1') {
+    if (!args[1]) {
+return;
+}
         message.guild.members.forEach(m => {
+   if(!message.member.hasPermission('ADMINISTRATOR')) return;
             var bc = new Discord.RichEmbed()
-.addField('**● المرسل  :**', `*** → ${message.author.username}#${message.author.discriminator}***`)
-            .addField('***● السيرفر  :***', `*** → ${message.guild.name}***`)               
-    .setColor('#ff0000')
-                 .addField('ّ', args)
-            m.send(``,{embed: bc});
+            .addField(' » الرسالة : ', args)
+            .setColor('#ff0000')
+            // m.send(`[${m}]`);
+            m.send(`${m}`,{embed: bc});
         });
     }
-})
+    } else {
+        return;
+    }
+});
 client.login(process.env.BOT_TOKEN);
